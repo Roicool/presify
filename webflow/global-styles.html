@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P1.4 (2026-11-18)
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.5 (2026-11-18)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -213,6 +213,12 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .hub-case-slot .home-story-media { border-color: var(--line--subtle); }
 .hub-case-slot .pill.is-on-light { color: var(--neutral--100); border-color: var(--line--mid); background: transparent; }
 .hub-case-slot .home-story-title { color: var(--neutral--0); }
+
+/* ===== Home fixes (Builder D) ===== */
+.home-row-media .icon-tile-img { width: 1.875rem; height: 1.875rem; filter: brightness(1.55) saturate(1.1); }
+.home-form-wrap { margin-bottom: 0; }
+.home-form-msg { font-size: .9375rem; line-height: 1.5; }
+.home-consent .w-checkbox-input { flex: none; margin: .15rem 0 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
