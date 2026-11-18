@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P1.5 (2026-11-18)
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.6 (2026-11-18)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -219,6 +219,80 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .home-form-wrap { margin-bottom: 0; }
 .home-form-msg { font-size: .9375rem; line-height: 1.5; }
 .home-consent .w-checkbox-input { flex: none; margin: .15rem 0 0; }
+
+/* ===== Resources (blog, policies, careers, 404) — Builder res-, for Global Styles ===== */
+/* Filter pills: hover + current category (Webflow adds w--current to the link of the page you're on) */
+.res-filter:hover { color: var(--neutral--0); border-color: var(--brand-primary--400); }
+.res-filter.w--current { background: var(--neutral--0); color: var(--neutral--950); border-color: var(--neutral--0); }
+/* Category chip dot */
+.res-tag::before { content: ""; width: .3125rem; height: .3125rem; border-radius: 50%; background: var(--brand-primary--400); flex: none; }
+/* Post card hover (cover lifts, title turns orange) */
+.res-post:hover .res-post-cover { border-color: color-mix(in srgb, var(--brand-primary--500) 55%, transparent); transform: translateY(-3px); }
+.res-post:hover .res-post-title { color: var(--brand-primary--300); }
+.res-post:focus-visible .res-post-cover { border-color: var(--brand-primary--400); }
+/* Empty CMS image fields: hide the broken <img>, keep the neutral cover box */
+.res-post-cover img:not([src]), .res-post-cover img[src=""],
+.res-cover img:not([src]), .res-cover img[src=""],
+.res-feature-media img:not([src]), .res-feature-media img[src=""] { display: none; }
+/* Article rich text */
+.res-rt > :first-child { margin-top: 0; }
+.res-rt h2 { font-family: var(--font--primary); font-weight: var(--font-weight--light); font-size: var(--heading--h3); line-height: var(--leading--tight); color: var(--neutral--0); margin-top: 1.5rem; }
+.res-rt h3 { font-family: var(--font--secondary); font-weight: var(--font-weight--semibold); font-size: var(--text--xl); line-height: var(--leading--snug); color: var(--neutral--0); margin-top: .75rem; }
+.res-rt ul, .res-rt ol { margin: 0; padding-left: 1.25rem; display: grid; gap: .5rem; }
+.res-rt a { color: var(--brand-primary--300); text-underline-offset: 3px; }
+.res-rt blockquote { margin: 0; border-left: 3px solid var(--brand-primary--500); padding: .25rem 0 .25rem 1.5rem; font-family: var(--font--primary); font-weight: var(--font-weight--light); font-size: var(--text--2xl); line-height: var(--leading--snug); color: var(--neutral--0); }
+.res-rt figure { margin: 0; display: grid; gap: .75rem; max-width: 100%; }
+.res-rt figure img { border-radius: var(--radius--2xl); width: 100%; height: auto; }
+.res-rt figcaption { font-size: var(--text--sm); color: var(--neutral--400); }
+.res-rt.is-light h2, .res-rt.is-light h3, .res-rt.is-light blockquote { color: var(--neutral--900); }
+/* Policy rows (light section) */
+.res-policy:hover .h3-style { color: var(--brand-primary--600); }
+/* Roles: native details */
+.res-role-sum::-webkit-details-marker { display: none; }
+.res-role[open] { border-color: color-mix(in srgb, var(--brand-primary--500) 55%, transparent); }
+.res-role[open] .res-role-sum .btn-chev { transform: rotate(90deg); }
+/* 404 numeral: gradient text + glow */
+.res-404-num { background: linear-gradient(180deg, #ee5a2a 0%, #c33a20 55%, rgba(12,12,12,.2) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 24px rgba(240,99,30,.45)); }
+/* Collection List pagination (Webflow w-pagination-*) */
+.w-pagination-wrapper { justify-content: center; gap: .75rem; margin-top: var(--spacing--8); }
+@media (prefers-reduced-motion: reduce) { .res-post-cover, .res-filter { transition: none; } .res-post:hover .res-post-cover { transform: none; } }
+
+/* ===== Core pages: Solutions, Technology, About, Contact (pg-) ===== */
+.pg-flow{isolation:isolate;background-image:linear-gradient(180deg,var(--neutral--900),var(--neutral--950))}
+.pg-flow::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-size:40px 40px;background-image:linear-gradient(color-mix(in srgb,var(--brand-primary--500) 8%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--brand-primary--500) 8%,transparent) 1px,transparent 1px)}
+.pg-flow-node:not(:last-child)::after{content:"";position:absolute;right:calc(-1*var(--spacing--4));top:50%;width:var(--spacing--4);height:2px;background:linear-gradient(90deg,var(--brand-primary--500),transparent)}
+.pg-flow-node.is-key{box-shadow:0 0 0 1px color-mix(in srgb,var(--brand-primary--500) 30%,transparent),0 0 30px -6px var(--accent--glow-core)}
+.pg-life::before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:1.5rem;height:1px;background:var(--line--mid)}
+.pg-life .icon-tile{position:relative;background:linear-gradient(color-mix(in srgb,var(--brand-primary--500) 8%,transparent),color-mix(in srgb,var(--brand-primary--500) 8%,transparent)),var(--neutral--900)}
+.pg-arch>.pg-arch-col:first-child::after,.pg-arch>.pg-arch-col:last-child::before{content:"";position:absolute;top:50%;width:var(--spacing--10);height:2px}
+.pg-arch>.pg-arch-col:first-child::after{right:calc(-1*var(--spacing--10));background:linear-gradient(90deg,transparent,var(--brand-primary--500))}
+.pg-arch>.pg-arch-col:last-child::before{left:calc(-1*var(--spacing--10));background:linear-gradient(90deg,var(--brand-primary--500),transparent)}
+.pg-arch-core{border-color:color-mix(in srgb,var(--brand-primary--500) 60%,transparent);background-image:radial-gradient(80% 80% at 50% 0%,color-mix(in srgb,var(--brand-primary--500) 25%,transparent),transparent 70%);box-shadow:0 0 60px -20px var(--accent--glow-core)}
+.pg-contact-card{background-image:linear-gradient(170deg,color-mix(in srgb,var(--brand-primary--900) 35%,var(--neutral--900)),var(--neutral--900))}
+.pg-contact-card .icon-tile svg{width:55%;height:55%}
+.stack>.btn{align-self:flex-start}
+@media (max-width:991px){.pg-flow-node::after,.pg-life::before,.pg-arch>.pg-arch-col::after,.pg-arch>.pg-arch-col::before{display:none}.pg-numcol:nth-child(3){border-left:0;padding-left:0}}
+
+/* ===== Product template (prod-) ===== */
+.prod-tag::before{content:"";width:.3125rem;height:.3125rem;border-radius:50%;background:var(--brand-primary--400);flex:none}
+.prod-hero .hl{overflow-wrap:anywhere}
+.prod-row:hover{background:linear-gradient(90deg,rgba(231,67,30,.06),transparent 70%)}
+.prod-row-media{background:radial-gradient(120% 120% at 20% 20%,rgba(231,67,30,.28),transparent 60%),repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 18px),linear-gradient(160deg,#1e1410,#121212)}
+.prod-row-media .icon-tile{width:3.5rem;height:3.5rem;background:rgba(12,12,12,.6)}
+.prod-pillar{background:linear-gradient(170deg,#1c120e 0%,#121212 55%)}
+.prod-pillar::after{content:"";position:absolute;z-index:-1;right:-5rem;top:-5rem;width:14rem;height:14rem;border-radius:50%;background:radial-gradient(closest-side,rgba(240,99,30,.35),transparent);pointer-events:none}
+.prod-step{background:rgba(255,255,255,.02)}
+.prod-step[open]{border-color:rgba(231,67,30,.55);background:linear-gradient(90deg,rgba(231,67,30,.12),rgba(255,255,255,.02))}
+.prod-switch{margin-left:auto;margin-right:auto;background:rgba(255,255,255,.02)}
+.prod-switch-link:hover{color:#fff;background:rgba(255,255,255,.05)}
+.prod-switch-link.is-active:hover{background:var(--brand-primary--600)}
+.prod-check::before{content:"";flex:none;margin-top:.45rem;width:.875rem;height:.5rem;border-left:2px solid var(--brand-primary--400);border-bottom:2px solid var(--brand-primary--400);transform:rotate(-45deg)}
+.prod-mapill{background:radial-gradient(80% 70% at 60% 40%,rgba(231,67,30,.18),transparent 70%),#0f0f0f}
+.prod-benefit::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--neutral--950) 0%,rgba(12,12,12,.35) 35%,rgba(12,12,12,.55) 100%)}
+.prod-glass{background:rgba(22,22,22,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.prod-glass>.icon-tile{margin-bottom:auto}
+.prod-hero .hb-device-base{margin-top:-1px}
+@media (prefers-reduced-motion:reduce){.prod-row,.prod-step,.prod-switch-link{transition:none}}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
