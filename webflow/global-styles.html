@@ -1,0 +1,109 @@
+<style>
+/* ============================================
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.0 (2026-11-18)
+   Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
+   Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
+   ============================================ */
+
+:root {
+  /* RC Structure gradient tokens (bg-gradient-* / text-gradient-* classes); transparency mixes in srgb */
+  --gradient--brand:        linear-gradient(135deg, var(--brand-primary--500), var(--brand-secondary--500));
+  --gradient--brand-hover:  linear-gradient(135deg, var(--brand-primary--600), var(--brand-secondary--600));
+  --gradient--brand-soft:   linear-gradient(135deg, var(--brand-primary--100), var(--brand-secondary--100));
+  --gradient--brand-deep:   linear-gradient(135deg, var(--brand-primary--800), var(--brand-secondary--900));
+  --gradient--ink:          linear-gradient(180deg, var(--neutral--900), var(--neutral--950));
+  --gradient--ink-flat:     linear-gradient(180deg, var(--neutral--950), var(--neutral--900));
+  --gradient--text-brand:   linear-gradient(90deg, var(--brand-primary--500), var(--brand-secondary--500));
+  --gradient--text-ink:     linear-gradient(90deg, var(--neutral--950), var(--neutral--600));
+  --gradient--text-mist:    linear-gradient(90deg, var(--neutral--0), var(--neutral--400));
+  --gradient--border-brand: linear-gradient(135deg, var(--brand-primary--500), var(--brand-secondary--500));
+  --gradient--border-shine: linear-gradient(135deg, var(--neutral--0), var(--neutral--300), var(--neutral--0));
+  --gradient--hero-dawn:    radial-gradient(120% 80% at 50% 0%, var(--brand-primary--100), var(--neutral--0) 70%);
+  --gradient--hero-dusk:    radial-gradient(120% 80% at 50% 0%, var(--brand-secondary--800), var(--neutral--950) 70%);
+  --gradient--hero-halo:    radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--brand-primary--300) 60%, transparent), transparent 70%);
+  --gradient--glow-warm:    radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--brand-primary--300) 50%, transparent), transparent 70%);
+  --gradient--glow-cool:    radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--brand-secondary--300) 50%, transparent), transparent 70%);
+  --gradient--wash-warm:    linear-gradient(180deg, var(--brand-primary--100), var(--neutral--0));
+  --gradient--wash-cool:    linear-gradient(180deg, var(--brand-secondary--100), var(--neutral--0));
+  --gradient--wash-horizon: linear-gradient(180deg, var(--neutral--0), var(--neutral--100));
+  --gradient--wash-rise:    linear-gradient(0deg, var(--brand-primary--100), transparent);
+  --gradient--scrim-top:    linear-gradient(180deg, color-mix(in srgb, var(--neutral--950) 70%, transparent), transparent);
+  --gradient--scrim-bottom: linear-gradient(0deg, color-mix(in srgb, var(--neutral--950) 70%, transparent), transparent);
+  --gradient--scrim-full:   linear-gradient(0deg, color-mix(in srgb, var(--neutral--950) 60%, transparent), color-mix(in srgb, var(--neutral--950) 60%, transparent));
+  /* Presify */
+  --gradient--highlight:    linear-gradient(90deg, #c33a20 0%, #ee5a2a 100%);
+  --gradient--glow:         radial-gradient(closest-side, rgba(240,99,30,.55), rgba(167,63,24,.22) 45%, rgba(65,24,18,0) 100%);
+  --gradient--mega-foot:    linear-gradient(90deg, rgba(195,58,32,.22), rgba(238,90,42,.06));
+  --shadow--btn:            0 8px 24px -10px rgba(231,67,30,.7);
+  --shadow--btn-hover:      0 10px 32px -8px rgba(240,99,30,.8);
+  --shadow--card-hover:     0 18px 48px -24px rgba(240,99,30,.55);
+}
+
+/* ── MARGIN RESET (Webflow defaults) ── */
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, ul, ol { margin: 0; }
+
+/* ── BASE ── */
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; -webkit-text-size-adjust: 100%; }
+* { -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+img, video { display: block; max-width: 100%; }
+p, li, blockquote, figcaption, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible { outline: 2px solid var(--brand-primary--400); outline-offset: 3px; border-radius: 2px; }
+::selection { background-color: var(--brand-primary--600); color: #fff; }
+::placeholder { opacity: 1; color: var(--neutral--500); }
+button, [role="button"], label[for], select, summary { cursor: pointer; }
+svg:not([fill]) { fill: currentColor; }
+
+/* ============ PRESIFY ============ */
+
+/* Highlight heading: thin line (Raleway 300) + bold line in the gradient bar.
+   Markup: h2.h2-style > span.hl-row "thin" + span.hl-row > span.hl "bold". Max one bar per viewport. */
+.hl-row { display: block; }
+.hl { display: inline; font-family: var(--font--secondary); font-weight: 700; letter-spacing: -.02em; color: #fff;
+  background-image: var(--gradient--highlight); padding: 0 .16em; line-height: 1.3;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hl-strong { font-family: var(--font--secondary); font-weight: 700; letter-spacing: -.02em; }
+
+/* Buttons: hover/transition + chevron slide (layout/colour live in the Webflow btn classes) */
+.btn { transition: background-color .2s, border-color .2s, color .2s, box-shadow .2s; }
+.btn .btn-chev { transition: transform .2s; }
+.btn:hover .btn-chev { transform: translateX(3px); }
+.btn.is-primary { box-shadow: var(--shadow--btn); }
+.btn.is-primary:hover { box-shadow: var(--shadow--btn-hover); }
+
+/* Decorative backgrounds (aria-hidden divs) */
+.deco-glow-wrap { position: relative; isolation: isolate; overflow: hidden; }
+.deco-glow { position: absolute; z-index: -1; pointer-events: none; width: 70rem; height: 70rem; border-radius: 50%; background: var(--gradient--glow); }
+.deco-dots { position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background-image: radial-gradient(rgba(231,67,30,.35) 1px, transparent 1.4px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%); }
+.deco-gridlines { position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background-image: linear-gradient(rgba(231,67,30,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(231,67,30,.16) 1px, transparent 1px); background-size: 72px 72px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%); mask-image: linear-gradient(180deg, #000 0%, transparent 75%); }
+.deco-neon { position: absolute; z-index: -1; pointer-events: none; color: var(--accent--glow-core);
+  filter: drop-shadow(0 0 6px rgba(240,99,30,.9)) drop-shadow(0 0 22px rgba(240,99,30,.6)); }
+
+/* Glass card (Amperon stats) */
+.glass { background: rgba(22,22,22,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+
+/* Card hover (whole card is a link) */
+.card-link { transition: border-color .2s, box-shadow .2s, transform .2s; }
+.card-link:hover { border-color: rgba(231,67,30,.55); box-shadow: var(--shadow--card-hover); transform: translateY(-2px); }
+
+/* Scroll-snap carousel (JS-free) */
+.snap-row { display: grid; grid-auto-flow: column; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.snap-row > * { scroll-snap-align: start; }
+.snap-row::-webkit-scrollbar { display: none; }
+
+/* Native details (FAQ + mobile accordion) */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary .caret { transform: rotate(180deg); }
+.caret { transition: transform .2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
