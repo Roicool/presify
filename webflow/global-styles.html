@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P1.2 (2026-11-18)
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.3 (2026-11-18)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -120,6 +120,7 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .nav-item:has(> .nav-panel.is-mega) { position: static; }
 .nav-panel { position: absolute; top: 100%; z-index: 60; opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s; }
 .nav-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; } /* hover bridge */
+.nav-panel.is-mega::before { top: -24px; height: 24px; }
 .nav-panel.is-mega { left: 50%; width: min(64rem, 100%); transform: translate(-50%, 8px); box-shadow: 0 40px 80px -24px rgba(0,0,0,.8), 0 0 0 1px rgba(231,67,30,.06); }
 .nav-panel.is-drop { left: 0; min-width: 15rem; padding: .5rem; transform: translateY(8px); }
 .nav-item:hover > .nav-panel, .nav-item:focus-within > .nav-panel { opacity: 1; visibility: visible; }
@@ -166,6 +167,35 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .icon-tile svg, .icon-tile-img { width: 1.375rem; height: 1.375rem; }
 @media (max-width: 767px) { .hub-ctas .btn { width: 100%; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .prob-card, .pcard { transition: none; } }
+
+/* ===== Home batch 2: solutions + group (Builder D) ===== */
+.home-tab:hover { color: var(--neutral--0); }
+.home-tab.is-active { background: linear-gradient(180deg, transparent, rgba(231,67,30,.08)); }
+.home-sol:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(231,67,30,.6); }
+.home-sol-more { text-decoration-color: var(--brand-primary--500); }
+.home-collage > .home-collage-tile:nth-child(2), .home-collage > .home-collage-tile:nth-child(5) { margin-top: 2.5rem; }
+@media (max-width: 767px) { .home-collage > .home-collage-tile:nth-child(n+4) { display: none; } }
+.home-statement { font-family: var(--font--primary); }
+.home-statement em { font-style: normal; font-family: var(--font--secondary); font-weight: 600; color: var(--brand-primary--400); }
+.home-group-grid ~ .deco-dots, .deco-glow-wrap > .deco-dots { -webkit-mask-image: radial-gradient(ellipse at 30% 50%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 30% 50%, #000, transparent 70%); }
+@media (prefers-reduced-motion: reduce) { .home-sol, .home-tab { transition: none; } .home-sol:hover { transform: none; } }
+
+/* ===== Home batch 3: why, platform + form, stats (Builder D) ===== */
+.home-row:hover { background: linear-gradient(90deg, rgba(231,67,30,.06), transparent 70%); }
+.home-row-media { background: radial-gradient(120% 120% at 20% 20%, rgba(231,67,30,.28), transparent 60%), repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 18px), linear-gradient(160deg, #1e1410, #121212); }
+.home-row-media .icon-tile { width: 3.5rem; height: 3.5rem; background: rgba(12,12,12,.6); }
+.home-check::before { content: ""; flex: none; margin-top: .45rem; width: .875rem; height: .5rem; border-left: 2px solid var(--brand-primary--400); border-bottom: 2px solid var(--brand-primary--400); transform: rotate(-45deg); }
+.home-input::placeholder { color: var(--neutral--500); opacity: 1; }
+.home-input:focus { outline: none; border-color: var(--brand-primary--400); box-shadow: 0 0 0 3px rgba(231,67,30,.2); }
+.home-consent input { flex: none; width: 1rem; height: 1rem; margin-top: .15rem; accent-color: var(--brand-primary--500); }
+.home-consent a { color: var(--brand-primary--400); }
+.home-form .btn { justify-content: center; }
+.home-stats::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--neutral--950) 0%, rgba(12,12,12,.35) 35%, rgba(12,12,12,.55) 100%); }
+.home-glass { background: rgba(22,22,22,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.12); }
+.home-glass > .icon-tile { margin-bottom: auto; }
+.home-glass.is-team { background: linear-gradient(160deg, rgba(195,58,32,.55), rgba(22,22,22,.6)); }
+.home-glass.is-team .btn { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .home-row { transition: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
