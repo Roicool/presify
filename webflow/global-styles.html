@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P1.3 (2026-11-18)
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.4 (2026-11-18)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -157,7 +157,8 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .hub-hero { isolation: isolate; }
 .hub-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12,12,12,.94) 0%, rgba(12,12,12,.75) 45%, rgba(12,12,12,.2) 100%), linear-gradient(0deg, #0c0c0c 0%, transparent 40%); }
 .pill::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--brand-primary--500); flex: none; }
-.crumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { color: var(--brand-primary--500); text-decoration: underline; text-underline-offset: 3px; }
 .pcard-media { background: radial-gradient(120% 90% at 80% 0%, rgba(231,67,30,.28), transparent 60%), linear-gradient(160deg, #24140f, #141414); }
 .aud { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(160deg, #1b1310 0%, #111 60%); }
 .aud::after { content: ""; position: absolute; right: -6rem; top: -6rem; width: 18rem; height: 18rem; z-index: -1; background: radial-gradient(closest-side, rgba(240,99,30,.4), transparent); pointer-events: none; }
@@ -196,6 +197,22 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .home-glass.is-team { background: linear-gradient(160deg, rgba(195,58,32,.55), rgba(22,22,22,.6)); }
 .home-glass.is-team .btn { color: #fff; }
 @media (prefers-reduced-motion: reduce) { .home-row { transition: none; } }
+
+/* ===== Home batch 4: case carousel + CTA band (Builder D) ===== */
+.home-carousel { scrollbar-width: none; }
+.home-carousel::-webkit-scrollbar { display: none; }
+.home-carousel > * { scroll-snap-align: start; }
+.home-story:hover .home-story-title { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brand-primary--500); }
+.home-cta { background: linear-gradient(90deg, #0c0c0c 30%, #2a120b); }
+.home-cta-art { -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%); mask-image: linear-gradient(90deg, transparent, #000 35%); }
+.home-cta-art svg { width: 100%; height: 100%; display: block; }
+@media (max-width: 991px) { .home-cta-art { -webkit-mask-image: none; mask-image: none; } }
+@media (max-width: 767px) { .home-cta .btn-group { flex-direction: column; align-items: stretch; } .home-cta .btn { width: 100%; justify-content: center; } }
+/* Case Card on dark (hub proof slot) */
+.hub-case-slot .home-story { color: var(--neutral--0); }
+.hub-case-slot .home-story-media { border-color: var(--line--subtle); }
+.hub-case-slot .pill.is-on-light { color: var(--neutral--100); border-color: var(--line--mid); background: transparent; }
+.hub-case-slot .home-story-title { color: var(--neutral--0); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
