@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P1.1 (2026-11-18)
+   PRESIFY — WEBFLOW GLOBAL CSS  P1.2 (2026-11-18)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -150,7 +150,22 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .hb-device-img { border-radius: 1rem; box-shadow: 0 50px 100px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.08); }
 .hb-device-base { background: linear-gradient(180deg, #e7431e, #922a14); box-shadow: 0 18px 40px -10px rgba(231,67,30,.6); }
 .hb-waves svg { width: 100%; height: 100%; display: block; }
-@media (max-width: 767px) { .ht-grid .btn-group .btn { width: 100%; justify-content: center; } }
+@media (max-width: 767px) { .home-hero-grid .btn-group { flex-direction: column; align-items: stretch; } .home-hero-grid .btn-group .btn { width: 100%; justify-content: center; } }
+
+/* ===== Segment hubs (Builder C) ===== */
+.hub-hero { isolation: isolate; }
+.hub-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12,12,12,.94) 0%, rgba(12,12,12,.75) 45%, rgba(12,12,12,.2) 100%), linear-gradient(0deg, #0c0c0c 0%, transparent 40%); }
+.pill::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--brand-primary--500); flex: none; }
+.crumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pcard-media { background: radial-gradient(120% 90% at 80% 0%, rgba(231,67,30,.28), transparent 60%), linear-gradient(160deg, #24140f, #141414); }
+.aud { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(160deg, #1b1310 0%, #111 60%); }
+.aud::after { content: ""; position: absolute; right: -6rem; top: -6rem; width: 18rem; height: 18rem; z-index: -1; background: radial-gradient(closest-side, rgba(240,99,30,.4), transparent); pointer-events: none; }
+.bar-fill.is-after { background-image: var(--gradient--highlight); }
+.cta-block { position: relative; overflow: hidden; isolation: isolate; }
+.cta-block::after { content: ""; position: absolute; left: -8rem; top: -8rem; width: 26rem; height: 26rem; border-radius: 50%; z-index: -1; border: 1px solid rgba(240,99,30,.35); box-shadow: 0 0 0 3rem rgba(240,99,30,.04), 0 0 0 6rem rgba(240,99,30,.03); pointer-events: none; }
+.icon-tile svg, .icon-tile-img { width: 1.375rem; height: 1.375rem; }
+@media (max-width: 767px) { .hub-ctas .btn { width: 100%; justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { .prob-card, .pcard { transition: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
