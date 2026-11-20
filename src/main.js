@@ -3,8 +3,11 @@
  * Kural: JS class'lara değil data-rc="<modul>" attribute'una bağlanır.
  * Her modül izole çalışır; biri hata verirse diğerleri etkilenmez.
  */
+import motion from './modules/motion.js';
+import carousel from './modules/carousel.js';
+
 const modules = {
-  // örnek: 'slider': () => import('./modules/slider.js'),
+  carousel: () => Promise.resolve({ default: carousel }),
 };
 
 function init(root = document) {
@@ -24,10 +27,11 @@ function init(root = document) {
   });
 }
 
-window.RC = Object.assign(window.RC || {}, { init, version: __VERSION__ });
+window.RC = Object.assign(window.RC || {}, { init, motion, version: __VERSION__ });
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => init());
-} else {
+function boot() {
+  try { motion(); } catch (err) { console.warn('[RC] motion', err); }
   init();
 }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
