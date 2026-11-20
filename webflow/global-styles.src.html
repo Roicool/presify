@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P2.6 (2026-11-20, de-AI + motion)
+   PRESIFY — WEBFLOW GLOBAL CSS  P2.7 (2026-11-20, de-AI + motion)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -554,7 +554,7 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .pg-flow-row { column-gap: 2rem; }
 .pg-flow-node:not(:last-child)::after { right: -2rem; width: 2rem; }
 /* TEMP screens: flat app frame, no device bezel (audit #13) */
-.hb-device, .hb-device-screen, .hb-device-frame, .hb-device-wrap { padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
+.hb-device, .hb-device-screen, .hb-device-frame, .hb-device-wrap, .pg-device { padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
 .hb-device-img { border-radius: var(--radius--media); border: 1px solid var(--line--mid); background: #121212; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7); }
 /* Group statement collage: two real photos fill the column */
 .home-collage { grid-template-columns: 1fr 1fr; gap: .75rem; }
@@ -588,7 +588,7 @@ details[open] > summary .caret { transform: rotate(180deg); }
 /* #000 is not a token */
 .bg-black { background-color: var(--neutral--950); }
 /* Back-to-back dark sections: no doubled gap (target ≈132) */
-:is(.sc-py-lg, .sc-py-md):is(.bg-neutral-950, .bg-black, :not([class*="bg-"])) + :is(.sc-py-lg, .sc-py-md):is(.bg-neutral-950, .bg-black, :not([class*="bg-"])) { padding-top: 0; }
+:is(.sc-py-lg, .sc-py-md, .hubhero-v2, .hub-cta-wrap, .res-pb-lg, .res-pb-md):is(.bg-neutral-950, .bg-black, :not([class*="bg-"])) + :is(.sc-py-lg, .sc-py-md, .hub-cta-wrap):is(.bg-neutral-950, .bg-black, :not([class*="bg-"])) { padding-top: 0 !important; }
 .bg-neutral-900:is(.sc-py-lg, .sc-py-md) + .bg-neutral-900:is(.sc-py-lg, .sc-py-md) { padding-top: 0; }
 /* Battery-optimization feature cards: equal flat media */
 .prod-pillar-screen { padding: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: .5rem; background: var(--neutral--800); }
@@ -612,8 +612,7 @@ details[open] > summary .caret { transform: rotate(180deg); }
 @media (max-width: 767px) { .grid-2col.gap-4, .grid-2col.gap-3, .grid-2col.gap-sm { row-gap: .75rem; } .grid-4col.gap-4:has(.pg-portrait) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .pg-portrait.slot-ph { aspect-ratio: 4 / 5; height: auto; }
 /* Footer legal links never break mid-label */
-.site-footer-link.is-sub { white-space: nowrap; }
-.site-footer-link.is-sub:first-child { margin-left: 0; }
+.row.gap-6 > .site-footer-link.is-sub { white-space: nowrap; }
 .row.gap-6:has(> .site-footer-link.is-sub) { flex-wrap: wrap; row-gap: .5rem; }
 
 /* 7. Reduced motion */
