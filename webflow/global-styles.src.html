@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P2.7 (2026-11-20, de-AI + motion)
+   PRESIFY — WEBFLOW GLOBAL CSS  P2.8 (2026-11-20, de-AI + motion)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -614,6 +614,10 @@ details[open] > summary .caret { transform: rotate(180deg); }
 /* Footer legal links never break mid-label */
 .row.gap-6 > .site-footer-link.is-sub { white-space: nowrap; }
 .row.gap-6:has(> .site-footer-link.is-sub) { flex-wrap: wrap; row-gap: .5rem; }
+
+/* P2.8: AD r4 */
+:is(.sc-py-lg, .sc-py-md):is(.bg-neutral-950, .bg-black, :not([class*="bg-"])) + section:not([class*="bg-"]) > .hub-cta-wrap:first-child { padding-top: 0 !important; }
+.hubhero-media:not(:has(.app-float)) { padding-bottom: 0; }
 
 /* 7. Reduced motion */
 @media (prefers-reduced-motion: reduce) {
