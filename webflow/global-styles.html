@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P2.2 (2026-11-20, de-AI + motion)
+   PRESIFY — WEBFLOW GLOBAL CSS  P2.3 (2026-11-20, de-AI + motion)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -499,7 +499,7 @@ details[open] > summary .caret { transform: rotate(180deg); }
   .cta-block { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 3rem; align-items: center; justify-items: start; text-align: left; }
   .cta-block > :not(.w-embed) { grid-column: 1; }
   .cta-block > .w-embed:last-child { grid-column: 2; grid-row: 1 / span 3; align-self: center; width: 100%; } }
-.cta-block-art { width: 100%; pointer-events: none; }
+.cta-block-art, .cta-block .home-cta-art { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 620 / 300; pointer-events: none; }
 @media (max-width: 991px) { .cta-block > .w-embed:last-child { position: absolute; inset: auto 0 0 0; z-index: 0; } .cta-block > :not(.w-embed) { position: relative; z-index: 1; } .cta-block-art { opacity: .25; } }
 /* Technology lifecycle: step number on the line */
 .pg-life-num { display: inline-flex; align-items: center; height: 3rem; width: max-content; padding-right: .75rem; font-size: .75rem; letter-spacing: .08em;
