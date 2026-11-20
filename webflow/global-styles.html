@@ -1,6 +1,6 @@
 <style>
 /* ============================================
-   PRESIFY — WEBFLOW GLOBAL CSS  P2.0 (2026-11-20, de-AI + motion)
+   PRESIFY — WEBFLOW GLOBAL CSS  P2.2 (2026-11-20, de-AI + motion)
    Base = RC Structure v1.1 (+ srgb fix, margin reset). Presify block below.
    Source: Roicool/presify webflow/global-styles.html — keep identical to the embed.
    ============================================ */
@@ -65,16 +65,16 @@ svg:not([fill]) { fill: currentColor; }
 
 /* ── Type emphasis ── */
 .display-1 strong, .h1-style strong, .h2-style strong, .h3-style strong, .home-statement strong, .home-statement em {
-  font-family: var(--font--secondary); font-weight: 600; font-style: normal; letter-spacing: -.03em; color: var(--neutral--0); }
+  font-family: var(--font--secondary); font-weight: 600; font-style: normal; letter-spacing: -.03em; color: inherit; }
 .display-1, .h1-style, .h2-style { text-wrap: balance; }
 .text-two-tone > span { color: var(--neutral--400); }
 /* Legacy highlight markup → plain weight contrast (rows flow as one sentence) */
 .hl-row { display: inline; }
 .hl-row + .hl-row::before { content: " "; }
-.hl { font-family: var(--font--secondary); font-weight: 600; letter-spacing: -.03em; color: var(--neutral--0); }
+.hl { display: inline; font-family: var(--font--secondary); font-weight: 600; letter-spacing: -.03em; color: inherit; }
 .hl-strong { font-family: var(--font--secondary); font-weight: 600; letter-spacing: -.03em; }
 /* The one brand moment per page: closing CTA heading keeps the bar */
-.home-cta .hl, .cta-block .hl, .cta-band .hl { background-image: var(--gradient--highlight); padding: 0 .16em; line-height: 1.3;
+.home-cta .hl, .cta-block .hl, .cta-band .hl { color: #fff; background-image: var(--gradient--highlight); padding: 0 .16em; line-height: 1.3;
   -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .home-cta .hl-row, .cta-block .hl-row, .cta-band .hl-row { display: block; }
 .home-cta .hl-row + .hl-row::before, .cta-block .hl-row + .hl-row::before, .cta-band .hl-row + .hl-row::before { content: none; }
@@ -284,8 +284,6 @@ details[open] > summary .caret { transform: rotate(180deg); }
 
 /* ===== Hubs ===== */
 .pcard, .prob-card, .aud, .res-quick, .pg-flow-node, .prod-pillar, .pg-contact-card, .case-feature { border-radius: var(--radius--card); }
-.prob-card { background: var(--neutral--900); border-color: var(--line--subtle); color: var(--neutral--200); }
-.prob-card .h4-style, .prob-card h3 { color: var(--neutral--0); }
 .prob-num { font: 500 .875rem/1 var(--font--mono); color: var(--neutral--500); }
 .pcard { transition: border-color var(--dur--base) var(--ease--out); }
 .pcard:hover { border-color: var(--line--mid); transform: none; box-shadow: none; }
@@ -476,6 +474,41 @@ details[open] > summary .caret { transform: rotate(180deg); }
 .app-live i { animation: rc-pulse 2.4s ease-in-out infinite; }
 /* 4. Count-up: tabular so width doesn't jump */
 [data-rc-count] { font-feature-settings: "tnum"; }
+
+/* ===== P2.1: builder requests (stagger, hub hero, CTA block chart, lifecycle numbers) ===== */
+/* Stagger: the Webflow API refuses inline style, so --i comes from position or data-rc-reveal="0..5" */
+[data-rc-reveal]:nth-child(2) { --i: 1; } [data-rc-reveal]:nth-child(3) { --i: 2; } [data-rc-reveal]:nth-child(4) { --i: 3; }
+[data-rc-reveal]:nth-child(5) { --i: 4; } [data-rc-reveal]:nth-child(n+6) { --i: 5; }
+.w-dyn-item:nth-child(3n+1) > [data-rc-reveal] { --i: 0; } .w-dyn-item:nth-child(3n+2) > [data-rc-reveal] { --i: 1; } .w-dyn-item:nth-child(3n+3) > [data-rc-reveal] { --i: 2; }
+[data-rc-reveal][data-rc-reveal="0"] { --i: 0; } [data-rc-reveal][data-rc-reveal="1"] { --i: 1; } [data-rc-reveal][data-rc-reveal="2"] { --i: 2; }
+[data-rc-reveal][data-rc-reveal="3"] { --i: 3; } [data-rc-reveal][data-rc-reveal="4"] { --i: 4; } [data-rc-reveal][data-rc-reveal="5"] { --i: 5; }
+/* Announce + stats */
+.announce > p { display: inline; }
+.home-stats { background-image: none; }
+/* Hub hero facts + crumbs + float card */
+.hubhero-facts .flex-wrap { column-gap: .5rem; row-gap: .125rem; }
+.hubhero-facts .flex-wrap > p + p::before { content: "·"; margin-right: .5rem; color: var(--neutral--500); }
+.crumbs [aria-current="page"] { color: var(--neutral--200); }
+.app-cardhead > .w-embed { flex: none; }
+.app-float > .w-embed { display: block; }
+.app-float .app-title, .app-float .app-sub, .app-float .app-kpi-k, .app-float .app-kpi-v { margin: 0; }
+.app-float-kpis .app-kpi-k { display: block; }
+@media (max-width: 767px) { .hub-ctas .btn.is-quiet, .prod-hero .btn.is-quiet { border: 1px solid var(--line--mid); padding: 0 1.375rem; justify-content: center; } }
+/* CTA Block: text left, forecast chart right */
+@media (min-width: 992px) {
+  .cta-block { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 3rem; align-items: center; justify-items: start; text-align: left; }
+  .cta-block > :not(.w-embed) { grid-column: 1; }
+  .cta-block > .w-embed:last-child { grid-column: 2; grid-row: 1 / span 3; align-self: center; width: 100%; } }
+.cta-block-art { width: 100%; pointer-events: none; }
+@media (max-width: 991px) { .cta-block > .w-embed:last-child { position: absolute; inset: auto 0 0 0; z-index: 0; } .cta-block > :not(.w-embed) { position: relative; z-index: 1; } .cta-block-art { opacity: .25; } }
+/* Technology lifecycle: step number on the line */
+.pg-life-num { display: inline-flex; align-items: center; height: 3rem; width: max-content; padding-right: .75rem; font-size: .75rem; letter-spacing: .08em;
+  color: var(--neutral--500); background: var(--neutral--900); font-feature-settings: "tnum"; position: relative; z-index: 1; }
+.pg-life.is-in .pg-life-num { animation: rc-rise 600ms var(--ease--out) both; }
+.pg-life.is-in > :nth-child(2) .pg-life-num { animation-delay: 80ms; } .pg-life.is-in > :nth-child(3) .pg-life-num { animation-delay: 160ms; }
+.pg-life.is-in > :nth-child(4) .pg-life-num { animation-delay: 240ms; } .pg-life.is-in > :nth-child(5) .pg-life-num { animation-delay: 320ms; }
+/* Nav mega footer */
+.nav-mega-foot { justify-content: flex-start; }
 
 /* 7. Reduced motion */
 @media (prefers-reduced-motion: reduce) {
