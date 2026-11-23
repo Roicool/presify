@@ -1,5 +1,5 @@
 <style>
-/* Presify GLOBAL CSS v3 V4.0 (2026-11-23) — lives in the Nav component embed */
+/* Presify GLOBAL CSS v3 V4.1 (2026-11-23) — lives in the Nav component embed */
 /* Presify v3 — production layer (from AD v3 mock 2026-11-23).
    Builds on v2/hero/hero-v2.css (tokens, buttons, arrows) and v2/components/components-v2.css.
    Prefixes: mn- mega nav · xc- expanding cards · wy- why rows · ar- article · th- theme morph */
@@ -741,4 +741,89 @@ a.res-tag:hover{color:#fff;border-color:var(--line--strong,var(--neutral--500))}
 .tour-side li::before{content:"";position:absolute;left:0;top:.7em;width:.5rem;height:1px;background:var(--neutral--400)}
 .tour-side .quiet{margin-top:auto}
 @media (max-width:991px){.tour-grid{grid-template-columns:1fr}}
+/* ===== V4.1: builder requests (v4) ===== */
+
+/* --- features --- */
+/* Builder A · v4 Feature Tabs (product pages) — requests for the Nav "Global Styles v3" embed (V4.0 block).
+   Markup: component "Feature Tabs" (Shared, 046f3833-6098-3f2e-d8ac-7eec199cf5be). Sample screens are
+   HtmlEmbeds inside the panel slots; they use only ui-* classes plus the three helpers below
+   (they replace the mock's inline style="" attributes). */
+
+/* 1 · wrapper span around .ft-t + .ft-dw inside the tab button (mock: unclassed <span>).
+      Webflow needs a class on it; it must stay the 2nd grid column, nothing else. */
+.ft-body{display:block;min-width:0}
+
+/* 2 · helpers used inside the sample-UI embeds */
+.ui-mt{margin-top:1rem}
+.ui-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1rem;color:var(--neutral--400);font-size:.75rem}
+@media (max-width:479px){.ui-foot{flex-wrap:wrap}}
+
+/* 3 · On the product pages the block sits in "container-xl stack gap-xl" under the Section Heading, so the
+      mock's .ft{margin-top:3.5rem} would double the gap (gap-xl + 56px). Let the stack gap own the spacing. */
+.stack>.ft{margin-top:0}
+
+/* 4 · Webflow wraps each HtmlEmbed in div.w-embed inside .ft-panel; nothing needed, noted for reviewers. */
+
+/* --- stats-xc --- */
+/* Builder B, 2026-11-23: requests for the Home stats bento (st-) and hub xc cards.
+   Not placed anywhere; the coordinator decides where (Nav "Global Styles v3" embed or page-home-stats.html). */
+
+/* 1. Home Stats: the container is `stack gap-xl`, so .st-b (margin-top 3.5rem) and .st-foot (2.5rem)
+      add their margin on top of the 48px gap (104px / 88px). Let the stack gap do the spacing. */
+.home-stats .stack > .st-b,
+.home-stats .stack > .st-foot{margin-top:0}
+
+/* 2. Proof tile: the product frame sits in an HtmlEmbed wrapper (.w-embed), so `.st-proof-ui .ui{flex:1}`
+      can't reach it. Let the wrapper grow so the dark tile fills its two rows like the mock. */
+.st-proof-ui > .w-embed{flex:1;display:flex;flex-direction:column}
+
+/* 3. "How we measure accuracy" is `btn is-quiet`. Inside the light (.th) section quiet buttons follow the
+      theme ink (dark), but this one sits on the dark proof tile. The mock uses white. */
+.st-tile.is-proof .btn.is-quiet{color:#fff}
+.st-tile.is-proof .btn.is-quiet:hover{color:var(--neutral--300)}
+
+/* 4. Fact-tile icons are HtmlEmbeds inside .st-row; keep the wrapper from stretching. */
+.st-row > .w-embed{flex:none;line-height:0}
+
+/* --- about --- */
+/* Builder C · About (/about-us) · v4 CSS requests (2026-11-23)
+   Add to the About page embed (page-about.html → "Page CSS: about") or GS v3, coordinator's call.
+   Reason for each rule is in the comment above it. */
+
+/* 1. Mock used .h1; the site H1 is .h1-style. Hero H1 size from the mock. */
+.ab-hgrid .h1-style{font-size:clamp(2.5rem,1.93rem + 2.86vw,4.5rem);line-height:1.04}
+
+/* 2. Value Item icon is an <img class="st-ic"> (SVG asset, image prop; HtmlEmbed code cannot bind to a prop).
+      .st-ic only exists in the Home stats embed, so size it here. */
+.ab-val .st-ic{display:block;width:1.75rem;height:1.75rem}
+
+/* 3. Milestone is a component <li>; per-instance class (is-now) is impossible, so the last item is "now". */
+.ml li:last-child::before{background:var(--ink)}
+
+/* 4. Leader Card: optional portrait (Show photo = on) covers the monogram tile. */
+.tm-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tm-n a{display:inline-flex;color:var(--ink-2)}
+
+/* 5. Careers + Office cards: the root is a Link block; the link label is div.btn.is-quiet (CSS arrow). */
+.co2-c{color:inherit;text-decoration:none}
+.co2-b .btn.is-quiet{margin-top:.5rem;justify-self:start;padding-left:0}
+.co2-b .overline{color:var(--neutral--400)}
+
+/* 6. Segments served reuses the existing Segment Link Card (a.pcard > .pcard-body > h3 + p + .pcard-foot > .btn.is-ghost)
+      as rows. page-about.html styles ".sg a / .sg b / .sg span" for the mock markup, so restyle the card here. */
+.sg a.pcard{display:block;padding:0;margin:0;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;min-height:0}
+.sg a.pcard::before,.sg a.pcard::after{content:none}
+.sg .pcard-body{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) auto;gap:1.5rem;align-items:center;padding:1.5rem 0;transition:padding var(--dur--base) var(--ease--out)}
+.sg a.pcard:hover .pcard-body{padding-left:.5rem}
+.sg .pcard-body h3{margin:0;font:600 1.25rem/1.3 var(--font--secondary);letter-spacing:-.01em;color:var(--ink)}
+.sg .pcard-body p{margin:0;font:400 1rem/1.5 var(--font--primary);color:var(--ink-2)}
+.sg .pcard-foot{margin:0;padding:0;border:0}
+.sg .pcard-foot .btn{color:var(--ink)}
+.sg .pcard-foot .btn-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:767px){
+  .sg .pcard-body{grid-template-columns:1fr auto;gap:.375rem 1rem}
+  .sg .pcard-body p{grid-row:2;grid-column:1}
+  .sg .pcard-foot{grid-row:1/3;grid-column:2}
+}
+
 </style>
