@@ -1,5 +1,5 @@
 <style>
-/* Presify GLOBAL CSS v3 V3.2 (2026-11-23) — lives in the Nav component embed */
+/* Presify GLOBAL CSS v3 V3.3 (2026-11-23) — lives in the Nav component embed */
 /* Presify v3 — production layer (from AD v3 mock 2026-11-23).
    Builds on v2/hero/hero-v2.css (tokens, buttons, arrows) and v2/components/components-v2.css.
    Prefixes: mn- mega nav · xc- expanding cards · wy- why rows · ar- article · th- theme morph */
@@ -522,4 +522,8 @@ a.res-tag:hover{color:#fff;border-color:var(--line--strong,var(--neutral--500))}
 .th.th.th[data-rc-morph].sc-py-md{padding-top:var(--section--py-md)!important}
 .xc-rows a,.xc-more{text-decoration:none}
 
+/* Nav links: no browser link styling inside the mega panels and the mobile sheet */
+:is(.mn-panel,.mn-sheet) a{color:inherit;text-decoration:none}
+:is(.mn-panel,.mn-sheet) a:hover :is(.mn-t,.mn-news-t){color:var(--brand-primary--600)}
+.mn-sheet-cta,.mn-sheet-cta:hover,.mn-panel .btn,.mn-btn-dark{color:#fff;text-decoration:none}
 </style>
