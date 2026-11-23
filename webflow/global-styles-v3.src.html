@@ -1,5 +1,5 @@
 <style>
-/* Presify GLOBAL CSS v3 V3.0 (2026-11-23) — lives in the Nav component embed */
+/* Presify GLOBAL CSS v3 V3.1 (2026-11-23) — lives in the Nav component embed */
 /* Presify v3 — production layer (from AD v3 mock 2026-11-23).
    Builds on v2/hero/hero-v2.css (tokens, buttons, arrows) and v2/components/components-v2.css.
    Prefixes: mn- mega nav · xc- expanding cards · wy- why rows · ar- article · th- theme morph */
@@ -325,5 +325,195 @@ html:not(.js) .wy:has(.wy-row:nth-child(2):hover) .wy-media>:nth-child(2),html:n
 .th[data-rc-theme="light"] :is(.btn.is-ghost,.btn.is-quiet):hover{color:var(--brand-primary--600)}
 /* themed sections carry their own background; neutralise old bg utilities on them */
 .th:is(.bg-black,.bg-neutral-950,.bg-neutral-900,.bg-neutral-50){background-color:var(--bg)}
+
+/* ===== Builder requests (v3) ===== */
+
+/* --- home --- */
+/* v3 GS requests — Home + hubs builder (xc cards, why rows, theme sections), 2026-11-23
+   Context: Webflow component instances cannot carry a per-instance class, so the first
+   Expanding Card / first Why Row cannot ship with .is-open / .is-on in the markup.
+   (The first why IMAGE frame does carry .is-on; it lives in Home Why itself.)
+   Please also add the two JS one-liners at the bottom to presify v0.3.0. */
+
+/* 1 · First expanding card open until something else is open (pre-JS and no-JS) */
+.xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child{flex-grow:var(--xc-grow,2.3);border-color:var(--line--mid)}
+.xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child .xc-panel{grid-template-rows:1fr}
+.xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child .xc-body{opacity:1}
+.xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child .xc-media img{transform:scale(1.02)}
+.xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child .xc-plus{transform:rotate(45deg);background:rgba(255,255,255,.12)}
+/* no-JS hover on another card closes the first one (mirrors the .is-open rule in GS v3) */
+html:not(.js) .xc:not(:has(> .xc-card.is-open)):has(> .xc-card:hover, > .xc-card:focus-within) > .xc-card:first-child:not(:hover):not(:focus-within){flex-grow:1}
+html:not(.js) .xc:not(:has(> .xc-card.is-open)):has(> .xc-card:hover, > .xc-card:focus-within) > .xc-card:first-child:not(:hover):not(:focus-within) .xc-panel{grid-template-rows:0fr}
+html:not(.js) .xc:not(:has(> .xc-card.is-open)):has(> .xc-card:hover, > .xc-card:focus-within) > .xc-card:first-child:not(:hover):not(:focus-within) .xc-body{opacity:0}
+@media (max-width:767px){
+  .xc:not(:has(> .xc-card.is-open)) > .xc-card:first-child .xc-media{height:12.5rem}
+}
+
+/* 2 · Card internals as built in Webflow */
+/* tags are divs (span text cannot be bound to props); hidden tags leave an empty wrapper */
+.xc-tags>div{font:500 .75rem/1 var(--font--mono);padding:.375rem .5rem;border:1px solid var(--line--mid);border-radius:.25rem;color:var(--neutral--300)}
+.xc-tags:empty{display:none}
+/* arrows: .v2-arr is only coloured in GS v3, give it size + the hover transition */
+.xc-rows a .v2-arr,.xc-more .v2-arr{flex:none;width:16px;height:16px;transition:transform var(--dur--fast) var(--ease--out)}
+.xc-more:hover .v2-arr{transform:translateX(3px)}
+/* title sits in a div inside the button (TextBlock); keep it inline-level for layout */
+.xc-head .xc-title{display:block;min-width:0}
+
+/* 3 · Why rows */
+/* first row marked until JS/hover sets .is-on (rows are component instances) */
+.wy-rows:not(:has(> .wy-row.is-on)) > .wy-row:first-child::before{transform:scaleY(1)}
+.wy-rows:not(:has(> .wy-row.is-on)) > .wy-row:first-child .wy-num{color:var(--ink)}
+/* frames are div > img (Webflow Image); the img itself needs the size */
+.wy-media>[data-rc-why-img] img{display:block;width:100%;height:100%;object-fit:cover}
+/* number is a <p> (Webflow Paragraph) */
+.wy-row .wy-num{margin:0}
+/* rows are role=listitem divs (Webflow Block cannot be li) — no list markers to reset */
+
+/* 4 · Theme sections: same-theme neighbours must not morph.
+   Hub proof sections are alternatives (Show SAIDI proof / Show case proof), so both carry
+   data-rc-morph; on the Market hub neither shows and the CTA follows the dark Products
+   section. Hidden sections are removed from the DOM, so the sibling test is reliable. */
+.th:not([data-rc-theme="light"]) + .th[data-rc-morph]:not([data-rc-theme="light"]),
+.th[data-rc-theme="light"] + .th[data-rc-morph][data-rc-theme="light"]{
+  animation:none!important;transition:none!important;
+  --bg:var(--t-bg);--ink:var(--t-ink);--ink-2:var(--t-ink-2);--line:var(--t-line)}
+
+/* 5 · Light-section legibility for classes with hard-coded dark-theme colours */
+/* Home Stats (now light) */
+.th[data-rc-theme="light"] :is(.stat-num,.stat-title){color:var(--ink)}
+.th[data-rc-theme="light"] :is(.stat-unit,.stat-text){color:var(--ink-2)}
+.th[data-rc-theme="light"] :is(.stat-row,.stat){border-color:var(--line)}
+/* Hub proof infographic card stays a dark card inside the light Proof section */
+.th[data-rc-theme="light"] .aud{--ink:#fff;--ink-2:var(--neutral--400);color:#fff}
+.th[data-rc-theme="light"] .aud :is(.text-neutral-0,.text-neutral-100){color:#fff}
+.th[data-rc-theme="light"] .aud :is(.text-neutral-300,.text-neutral-400){color:var(--neutral--400)}
+
+/* ---- JS requests (presify v0.3.0, src/modules/v3.js) ----
+   xcards, after `var cards = ...`:
+     if (!row.querySelector('[data-rc-xcard].is-open')) set(cards[0], true);
+   why-media, after defining on():
+     if (!wrap.querySelector('[data-rc-why-row].is-on')) on(0);
+*/
+
+/* --- nav --- */
+/* Nav builder (v3 mega menu) — CSS requests for global-styles-v3 (2026-11-23)
+   Markup lives in the Nav component 941bf17a…; the v3 embed is its first child ("Global Styles v3"). */
+
+/* 1. Arrow icon base. .v2-arr is used in the panels (news cards, "All solutions") but neither GS defines it.
+      The SVGs carry width/height/stroke attributes as a fallback, so this is mostly for the hover nudge. */
+.v2-arr{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .2s var(--ease--out)}
+a:hover>.v2-arr{transform:translateX(3px)}
+
+/* 2. Mock used inline style="gap:1.25rem" on the Resources/About item lists (Webflow refuses style attributes). */
+.mn-panel:is(.is-res,.is-about)>.mn-grid>.mn-list{gap:1.25rem}
+
+/* 3. The news cards sit in a wrapper div.mn-list (the placeholder the user swaps for a Collection List).
+      Match the mock's 12px card gap; also covers the future Collection List wrapper. */
+.mn-side>.mn-list,.mn-side .w-dyn-items{display:grid;gap:.75rem}
+
+/* 4. About contact card: mock had style="margin-top:-.5rem" on the line under the title. */
+.mn-contact .mn-s{margin-top:-.5rem}
+
+/* 5. Mobile sheet "All solutions" link (mock: .v3-quiet with inline colour). */
+.mn-all{display:inline-flex;align-items:center;gap:.5rem;font:600 .875rem/1 var(--font--secondary);color:var(--neutral--950)}
+
+/* 6. Spec §4: nav bar opacity .82 -> .94 (main GS sets .nav-bar rgba(12,12,12,.82)). */
+.nav-bar{background:rgba(12,12,12,.94)}
+
+/* 7. Sheet safety: never visible on desktop even if left open while resizing; pointer on accordion heads. */
+@media (min-width:992px){.mn-sheet{display:none!important}}
+.mn-acc>summary{cursor:pointer}
+
+/* JS note (not CSS): spec §4 asks for Esc to close an open desktop panel. :focus-within keeps it open
+   after Esc, so the module should blur the focused element inside .mn-item on Escape (or toggle .is-open). */
+
+/* --- themes --- */
+/* v3 theme requests: product pages (8), About, Technology. Builder th8pz, 2026-11-23.
+   Problem: the GS glue flips text-neutral-0..600 / h*-style to var(--ink)/var(--ink-2) inside .th,
+   but these cards keep a hard-coded dark surface and white-alpha borders. Inside a light section
+   that gives dark ink on a dark card (unreadable) or white lines on neutral-050 (invisible).
+   Fix: theme-relative surfaces and lines. The card tint is mixed from --ink and --bg, so it is
+   correct in both themes and at every point of the morph (ink always contrasts with it).
+   srgb mix on purpose (oklch + transparent shifts hue, see CLAUDE.md pitfalls). */
+
+/* 1 · Dark card surfaces -> theme-relative tint (light sections only) */
+.th[data-rc-theme="light"] :is(.pcard, .prod-pillar, .prod-chip, .case-feature, .prob-card) {
+  background-color: color-mix(in srgb, var(--ink) 4%, var(--bg));
+  background-image: none;
+  border-color: var(--line);
+}
+.th[data-rc-theme="light"] .pcard:hover { border-color: color-mix(in srgb, var(--ink) 22%, var(--bg)); }
+
+/* 2 · Titles/codes whose colour is a hard-coded white token (not covered by the text-neutral glue) */
+.th[data-rc-theme="light"] :is(.prod-row-title, .prod-pillar-title, .prod-chip-code, .case-feature-text) { color: var(--ink); }
+.th[data-rc-theme="light"] :is(.mono-label, .prod-tag, .why-num) { color: var(--ink-2); }
+
+/* 3 · White-alpha hairlines -> --line */
+.th[data-rc-theme="light"] :is(.prod-rows, .prod-row, .prod-row-media, .pg-chip, .prod-tag) { border-color: var(--line); }
+.th[data-rc-theme="light"] .prod-row:hover { background: color-mix(in srgb, var(--ink) 3%, transparent); }
+.th[data-rc-theme="light"] .pg-life::before { background: var(--line); }
+.th[data-rc-theme="light"] :is(.prod-mapill > img, .prod-mapill .slot-ph, .hb-device-img) { border-color: var(--line); }
+
+/* 4 · Placeholders / media wells that are neutral-800 */
+.th[data-rc-theme="light"] :is(.slot-ph, .prod-row-media, .prod-pillar-screen) { background-color: color-mix(in srgb, var(--ink) 8%, var(--bg)); }
+.th[data-rc-theme="light"] .slot-ph .mono-label { color: var(--ink-2); }
+
+/* 5 · Softer device shadow on light (the 0 30px 80px rgba(0,0,0,.7) reads as a black smear on neutral-050) */
+.th[data-rc-theme="light"] .hb-device-img { box-shadow: 0 24px 60px -24px rgba(12,12,12,.35); }
+
+/* Note: .text-neutral-500 (pg-life-num, Lifecycle Row) does not flip; neutral-500 on neutral-050 is
+   about 4.5:1, acceptable for the mono step numbers. Add it to the ink-2 glue if you prefer. */
+
+/* --- blog --- */
+/* Presify v3 · Blog article template (Builder: blog, 2026-11-23)
+   Requests for Global Styles v3. Markup is on the Blog Posts template (6afdfe09f844458e44df9f60).
+   Webflow adds .w-dyn-bind-empty to bound elements whose CMS field is empty; the "hide when empty"
+   rules below are a safety net until the user sets conditional visibility in the Designer
+   (the API cannot bind visibility to non-boolean fields). */
+
+/* Byline: Webflow text can't be bound inside <b>/<span>, so name/role are divs */
+.ar-by-n{font:600 .875rem/1.3 var(--font--secondary);color:#fff}
+.ar-by-r{font:400 .875rem/1.4 var(--font--primary);color:var(--neutral--400)}
+img.ar-avatar{object-fit:cover}
+.ar-avatar.w-dyn-bind-empty,img.ar-avatar:not([src]),img.ar-avatar[src=""]{display:none}
+.ar-by:has(.ar-by-n.w-dyn-bind-empty){display:none}
+/* "· Updated <date>" in the meta row: hide when Last updated is empty */
+.res-head .row:has(>.row>.w-dyn-bind-empty){display:none}
+
+/* Category chip is now a link (a.res-tag → Category URL) */
+a.res-tag{text-decoration:none;color:var(--neutral--200);transition:border-color var(--dur--fast),color var(--dur--fast)}
+a.res-tag:hover{color:#fff;border-color:var(--line--strong,var(--neutral--500))}
+
+/* TOC aside: summary text is a <span>; the "Written by · read time" line is 4 divs */
+.ar-toc-share{display:flex;flex-wrap:wrap;gap:.25rem}
+.ar-toc-share>.w-dyn-bind-empty{display:none}
+
+/* TL;DR: header label is two divs (mock used <span>); list comes from a bound rich text */
+.ar-tldr-h>div+div{font:400 .8125rem/1 var(--font--primary);letter-spacing:0;text-transform:none;color:var(--neutral--500)}
+.ar-tldr-rt>:first-child{margin-top:0}.ar-tldr-rt>:last-child{margin-bottom:0}
+.ar-tldr:has(.ar-tldr-rt.w-dyn-bind-empty){display:none}
+
+/* Body + FAQ use the existing res-rt inside the article column */
+.ar-main>.res-rt{margin-top:3rem;margin-left:0;margin-right:0}
+.ar-main>.ar-tldr+.res-rt,.ar-main>.res-rt:first-child{margin-top:3rem}
+.res-rt h2{scroll-margin-top:6.5rem}
+.ar-faq>div{display:grid;gap:.5rem}
+.ar-faq>div:has(>h3.w-dyn-bind-empty){display:none}
+.ar-faq:has(>div:nth-of-type(1)>h3.w-dyn-bind-empty){display:none}
+.ar-faq>.w-embed{display:none} /* FAQPage JSON-LD embeds; crawlers still read the script */
+
+/* Author block: avatar hidden when no photo → single column; empty links hidden */
+.ar-author:has(>.ar-avatar.w-dyn-bind-empty){grid-template-columns:minmax(0,1fr)}
+.ar-author:has(.ar-author-n.w-dyn-bind-empty){display:none}
+.ar-author-l a.w-dyn-bind-empty{display:none}
+.ar-author-l a{text-decoration:none}
+
+/* "More from Blog & News" is now a light .th section: cards must follow the theme */
+.th[data-rc-theme="light"] :is(.res-post,.res-post-title){color:var(--ink)}
+.th[data-rc-theme="light"] .res-post:hover .res-post-title{color:var(--ink)}
+.th[data-rc-theme="light"] .res-post-meta{color:var(--ink-2)}
+.th[data-rc-theme="light"] .res-tag{color:var(--ink-2);border-color:var(--line--dark-mid)}
+.th[data-rc-theme="light"] .res-post-cover{border-color:var(--line);background-color:var(--neutral--200)}
+.th[data-rc-theme="light"] .res-post:hover .res-post-cover{border-color:var(--line--dark-mid)}
 
 </style>

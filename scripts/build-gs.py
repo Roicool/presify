@@ -16,7 +16,8 @@ for name in ('global-styles', 'global-styles-v3'):
   body = re.sub(r'/\*.*?\*/', '', body, flags=re.S)
   body = re.sub(r'\s+', ' ', body)
   body = re.sub(r'\s*([{};,>])\s*', r'\1', body).replace(';}', '}').strip()
-  out = f'<style>/* Presify {name} CSS {ver} (minified; source: Roicool/presify webflow/{name}.src.html) */{body}</style>\n'
+  label = 'Global' if name == 'global-styles' else name
+  out = f'<style>/* Presify {label} CSS {ver} (minified; source: Roicool/presify webflow/{name}.src.html) */{body}</style>\n'
   if len(out) > 50000:
       sys.exit(f'{name}: too long for a Webflow embed: {len(out)} chars')
   (root / f'{name}.html').write_text(out)

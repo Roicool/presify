@@ -22,6 +22,7 @@ export default function v3() {
       if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false');
     }
     function open(card) { cards.forEach(function (c) { set(c, c === card); }); }
+    if (!row.querySelector('[data-rc-xcard].is-open')) set(cards[0], true);
     cards.forEach(function (card) {
       card.addEventListener('mouseenter', function () { if (fine.matches && !phone.matches) open(card); });
       card.addEventListener('focusin', function () { if (!card.classList.contains('is-open')) open(card); });
@@ -41,6 +42,7 @@ export default function v3() {
       rows.forEach(function (r, j) { r.classList.toggle('is-on', i === j); });
       media.forEach(function (m, j) { m.classList.toggle('is-on', i === j); });
     }
+    if (!wrap.querySelector('[data-rc-why-row].is-on')) on(0);
     rows.forEach(function (r, i) {
       r.addEventListener('mouseenter', function () { on(i); });
       r.addEventListener('click', function () { on(i); });
@@ -115,6 +117,6 @@ export default function v3() {
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     var item = document.activeElement && document.activeElement.closest('.mn-item');
-    if (item) { var l = item.querySelector('.mn-link'); if (l) l.focus(); item.classList.add('is-closed'); setTimeout(function () { item.classList.remove('is-closed'); }, 50); document.activeElement.blur(); }
+    if (item) { var l = item.querySelector('.mn-link, .nav-link'); if (l) l.focus(); item.classList.add('is-closed'); setTimeout(function () { item.classList.remove('is-closed'); }, 50); document.activeElement.blur(); }
   });
 }
