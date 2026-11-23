@@ -6,14 +6,18 @@ Edit the .src file, run `python3 scripts/build-gs.py`, paste/write global-styles
 """
 import pathlib, re, sys
 root = pathlib.Path(__file__).resolve().parent.parent / 'webflow'
-s = (root / 'global-styles.src.html').read_text()
-body = s[s.index('<style>') + 7:s.rindex('</style>')]
-ver = re.search(r'GLOBAL CSS\s+(P[\d.]+)', body).group(1)
-body = re.sub(r'/\*.*?\*/', '', body, flags=re.S)
-body = re.sub(r'\s+', ' ', body)
-body = re.sub(r'\s*([{};,>])\s*', r'\1', body).replace(';}', '}').strip()
-out = f'<style>/* Presify Global CSS {ver} (minified; source: Roicool/presify webflow/global-styles.src.html) */{body}</style>\n'
-if len(out) > 50000:
-    sys.exit(f'Too long for a Webflow embed: {len(out)} chars')
-(root / 'global-styles.html').write_text(out)
-print(f'{ver}: {len(out)} chars')
+for name in ('global-styles', 'global-styles-v3'):
+  src = root / f'{name}.src.html'
+  if not src.exists():
+    continue
+  s = src.read_text()
+  body = s[s.index('<style>') + 7:s.rindex('</style>')]
+  ver = re.search(r'GLOBAL CSS\s+(?:v3\s+)?([PV][\d.]+)', body).group(1)
+  body = re.sub(r'/\*.*?\*/', '', body, flags=re.S)
+  body = re.sub(r'\s+', ' ', body)
+  body = re.sub(r'\s*([{};,>])\s*', r'\1', body).replace(';}', '}').strip()
+  out = f'<style>/* Presify {name} CSS {ver} (minified; source: Roicool/presify webflow/{name}.src.html) */{body}</style>\n'
+  if len(out) > 50000:
+      sys.exit(f'{name}: too long for a Webflow embed: {len(out)} chars')
+  (root / f'{name}.html').write_text(out)
+  print(f'{ver}: {len(out)} chars')

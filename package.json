@@ -1,10 +1,10 @@
 {
   "name": "presify",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Presify Webflow sitesi custom code (JS/CSS) deposu.",
   "scripts": {
-    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2018 --define:__VERSION__='\"0.2.0\"' --outfile=dist/main.min.js",
+    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2018 --define:__VERSION__='\"0.3.0\"' --outfile=dist/main.min.js",
     "watch": "esbuild src/main.js --bundle --format=iife --target=es2018 --outfile=dist/main.min.js --watch"
   },
   "devDependencies": { "esbuild": "0.25.0" }
