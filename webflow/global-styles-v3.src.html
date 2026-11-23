@@ -1,5 +1,5 @@
 <style>
-/* Presify GLOBAL CSS v3 V3.1 (2026-11-23) — lives in the Nav component embed */
+/* Presify GLOBAL CSS v3 V3.2 (2026-11-23) — lives in the Nav component embed */
 /* Presify v3 — production layer (from AD v3 mock 2026-11-23).
    Builds on v2/hero/hero-v2.css (tokens, buttons, arrows) and v2/components/components-v2.css.
    Prefixes: mn- mega nav · xc- expanding cards · wy- why rows · ar- article · th- theme morph */
@@ -515,5 +515,11 @@ a.res-tag:hover{color:#fff;border-color:var(--line--strong,var(--neutral--500))}
 .th[data-rc-theme="light"] .res-tag{color:var(--ink-2);border-color:var(--line--dark-mid)}
 .th[data-rc-theme="light"] .res-post-cover{border-color:var(--line);background-color:var(--neutral--200)}
 .th[data-rc-theme="light"] .res-post:hover .res-post-cover{border-color:var(--line--dark-mid)}
+
+/* ===== V3.2 coordinator fixes ===== */
+/* Theme boundaries keep their top padding (the P2.7 same-background gap rule counted unclassed light sections as dark) */
+.th.th.th[data-rc-morph].sc-py-lg{padding-top:var(--section--py-lg)!important}
+.th.th.th[data-rc-morph].sc-py-md{padding-top:var(--section--py-md)!important}
+.xc-rows a,.xc-more{text-decoration:none}
 
 </style>
