@@ -6,6 +6,7 @@
 import motion from './modules/motion.js';
 import carousel from './modules/carousel.js';
 import v3 from './modules/v3.js';
+import ftabs from './modules/ftabs.js';
 
 const modules = {
   carousel: () => Promise.resolve({ default: carousel }),
@@ -33,6 +34,7 @@ window.RC = Object.assign(window.RC || {}, { init, motion, version: __VERSION__ 
 function boot() {
   try { motion(); } catch (err) { console.warn('[RC] motion', err); }
   try { v3(); } catch (err) { console.warn('[RC] v3', err); }
+  try { ftabs(); } catch (err) { console.warn('[RC] ftabs', err); }
   init();
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
