@@ -1,5 +1,5 @@
 <style>
-/* Presify GLOBAL CSS v3 V3.3 (2026-11-23) — lives in the Nav component embed */
+/* Presify GLOBAL CSS v3 V3.5 (2026-11-23) — lives in the Nav component embed */
 /* Presify v3 — production layer (from AD v3 mock 2026-11-23).
    Builds on v2/hero/hero-v2.css (tokens, buttons, arrows) and v2/components/components-v2.css.
    Prefixes: mn- mega nav · xc- expanding cards · wy- why rows · ar- article · th- theme morph */
@@ -526,4 +526,46 @@ a.res-tag:hover{color:#fff;border-color:var(--line--strong,var(--neutral--500))}
 :is(.mn-panel,.mn-sheet) a{color:inherit;text-decoration:none}
 :is(.mn-panel,.mn-sheet) a:hover :is(.mn-t,.mn-news-t){color:var(--brand-primary--600)}
 .mn-sheet-cta,.mn-sheet-cta:hover,.mn-panel .btn,.mn-btn-dark{color:#fff;text-decoration:none}
+/* ===== V3.4: blog article split header (user choice A, 2026-11-23) =====
+   Markup: section header > div.container-xl.ar-split > div.ar-split-text (crumbs, meta row, h1, summary, byline)
+                                                     + div.ar-split-media (cover image, radius 14)
+   Desktop: two equal columns, cover fills the text column's height (min 4:3). ≤991: stack, cover after byline. */
+.ar-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2.5rem,1rem + 4vw,5rem);align-items:stretch}
+.ar-split-text{display:flex;flex-direction:column;justify-content:center;gap:1.25rem;min-width:0}
+.ar-split-text h1{font-size:clamp(2rem,1.6rem + 1.6vw,3.25rem);line-height:1.1;text-wrap:balance}
+.ar-split-media{position:relative;min-height:22rem;border-radius:var(--radius--media);overflow:hidden;background:var(--neutral--800)}
+.ar-split-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:991px){.ar-split{grid-template-columns:1fr}.ar-split-media{min-height:0;aspect-ratio:16/10}.ar-split-media img{position:static}}
+/* --- r2 (dark above CTA) --- */
+/* v3 GS requests r2: sections above the closing CTA are now dark (user rule, 2026-11-23).
+   Builder dk7r2. These cards were built for a light surface (white card, neutral-900 text,
+   neutral-200 border as Webflow class values) and now sit in dark .th sections:
+   - Home "Case studies" (Home Case Carousel, now dark + morph): .home-story text is neutral-900
+   - Segment Hub "case proof" (Renewables): .case-feature is a white card, .case-feature-text neutral-600
+   - Technology "Regulatory readiness" (now dark): Problem Card .prob-card is a white card; its h4 is
+     flipped to var(--ink) by the .th glue, so it renders white on white until this lands.
+   Surfaces are mixed from --ink/--bg (same approach as themes.css), so the card keeps contrast at
+   every point of the morph (Home carousel morphs light -> dark). srgb on purpose (CLAUDE.md pitfall).
+   Selector excludes light sections, so Problem Cards in the light hub "Problems" section are untouched. */
+
+/* 1 · Home case cards (Case Card component, .home-story) */
+.th:not([data-rc-theme="light"]) .home-story{color:var(--ink)}
+.th:not([data-rc-theme="light"]) .home-story-media{border-color:var(--line)}
+
+/* 2 · Hub featured-project card (v2 hub mock: neutral-900 card, white text) */
+.th:not([data-rc-theme="light"]) .case-feature{
+  background-color:color-mix(in srgb, var(--ink) 6%, var(--bg));
+  border:1px solid var(--line)}
+.th:not([data-rc-theme="light"]) .case-feature-text{color:var(--ink-2)}
+
+/* 3 · Problem Card on dark (Technology Regulatory readiness) */
+.th:not([data-rc-theme="light"]) .prob-card{
+  background-color:color-mix(in srgb, var(--ink) 6%, var(--bg));
+  border-color:var(--line)}
+.th:not([data-rc-theme="light"]) .prob-card .prob-num{color:var(--ink-2)}
+.th:not([data-rc-theme="light"]) .prob-card:hover{border-color:color-mix(in srgb, var(--ink) 22%, var(--bg))}
+
+/* Not needed any more (safe to keep): ".bg-neutral-50 .carousel-arrow" no longer matches on Home,
+   the carousel section dropped bg-neutral-50; arrows take the default dark styling. */
+
 </style>
